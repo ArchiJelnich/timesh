@@ -1,11 +1,17 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_categ.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +48,125 @@ class Categ : Fragment() {
     }
 
 
+    @SuppressLint("ResourceAsColor")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        // val mySet = setOf("Red", "Orange", "Yellow", "Green", "Blue", "Dark Blue", "Purple", "Pink",  "Black", "Grey")
+
+        var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        var editor = sharedPref.edit()
+        var red = sharedPref.getString("red","Red")
+        var orange = sharedPref.getString("orange","Orange")
+        var yellow = sharedPref.getString("yellow","Yellow")
+        var green = sharedPref.getString("green","Green")
+        var blue = sharedPref.getString("blue","Blue")
+        var d_blue = sharedPref.getString("d_blue","Dark Blue")
+        var purple = sharedPref.getString("purple","Purple")
+        var pink = sharedPref.getString("pink","Pink")
+        var black = sharedPref.getString("black","Black")
+        var grey = sharedPref.getString("grey","Grey")
+
+        /* if (mySet.contains(red)) { red_tv.setTextColor(R.color.white)} else {red_tv.setTextColor(R.color.black)}
+        if (mySet.contains(orange)) { orange_tv.setTextColor(R.color.white)} else {orange_tv.setTextColor(R.color.black)}
+        if (mySet.contains(yellow)) { yellow_tv.setTextColor(R.color.white)} else {yellow_tv.setTextColor(R.color.black)}
+        if (mySet.contains(green)) { green_tv.setTextColor(R.color.white)} else {green_tv.setTextColor(R.color.black)}
+        if (mySet.contains(blue)) { blue_tv.setTextColor(R.color.white)} else {blue_tv.setTextColor(R.color.black)}
+        if (mySet.contains(d_blue)) { d_blue_tv.setTextColor(R.color.white)} else {d_blue_tv.setTextColor(R.color.black)}
+        if (mySet.contains(purple)) { purple_tv.setTextColor(R.color.white)} else {purple_tv.setTextColor(R.color.black)}
+        if (mySet.contains(pink)) { pink_tv.setTextColor(R.color.white)} else {pink_tv.setTextColor(R.color.black)}
+        if (mySet.contains(black)) { black_tv.setTextColor(R.color.white)} else {black_tv.setTextColor(R.color.black)}
+        if (mySet.contains(grey)) { grey_tv.setTextColor(R.color.white)} else {grey_tv.setTextColor(R.color.black)}
+*/
+        red_tv.setText(orange)
+        orange_tv.setText(orange)
+        yellow_tv.setText(yellow)
+        green_tv.setText(green)
+        blue_tv.setText(blue)
+        d_blue_tv.setText(d_blue)
+        purple_tv.setText(purple)
+        pink_tv.setText(pink)
+        black_tv.setText(black)
+        grey_tv.setText(grey)
+
+        red_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("red", s.toString()).commit()
+            }
+        })
+        orange_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("orange", s.toString()).commit()
+            }
+        })
+        yellow_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("yellow", s.toString()).commit()
+            }
+        })
+        green_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("green", s.toString()).commit()
+            }
+        })
+        blue_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("blue", s.toString()).commit()
+            }
+        })
+        d_blue_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("d_blue", s.toString()).commit()
+            }
+        })
+        purple_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("purple", s.toString()).commit()
+            }
+        })
+        pink_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("pink", s.toString()).commit()
+            }
+        })
+        black_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("black", s.toString()).commit()
+            }
+        })
+        grey_tv.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                editor.putString("grey", s.toString()).commit()
+            }
+        })
+
+
+
+        //editor.putBoolean("nightModeSwitched",false)
+        //editor.commit()
+
+
+    }
 
 
     companion object {

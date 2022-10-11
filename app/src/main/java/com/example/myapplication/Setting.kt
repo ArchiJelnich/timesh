@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
@@ -99,6 +100,27 @@ class Setting : Fragment() {
             editor.putBoolean("ask",isChecked)
             editor.commit()
         })
+
+        add_del.setOnClickListener(){
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Comfirmation")
+            builder.setMessage("Delete?")
+            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+            builder.setPositiveButton("Yes") { _, _ ->
+                sharedPref.edit().clear().commit();
+
+            }
+
+            builder.setNegativeButton("No") { _, _ ->
+
+            }
+
+            builder.show()
+
+
+
+        }
 
 
     }
