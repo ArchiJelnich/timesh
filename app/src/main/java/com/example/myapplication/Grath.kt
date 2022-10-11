@@ -1,10 +1,16 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_grath.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +42,70 @@ class Grath : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_grath, container, false)
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val contexth = activity
+
+
+
+
+
+
+
+
+        val cubes = ArrayList<TextView>(168)
+
+
+
+        var lay = l_1
+
+            for (i in 0 until 7) {
+
+                when (i) {
+                    0 -> lay = l_1
+                    1 -> lay = l_2
+                    2 -> lay = l_3
+                    3 -> lay = l_4
+                    4 -> lay = l_5
+                    5 -> lay = l_6
+                    6 -> lay = l_7
+                    else -> {
+
+                    }
+                }
+
+
+
+                for (j in 0 until 24) {
+
+                    var k = i*24 + j
+
+                    cubes.add(TextView(contexth))
+
+                    //cubes[k] = TextView(contexth)
+
+                    cubes[k].layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                    cubes[k].gravity = Gravity.CENTER
+                    cubes[k].width=50
+                    cubes[k].height=50
+
+                    cubes[k].setBackgroundColor(Color.parseColor("#000000"))
+
+                    lay.addView(cubes[k])
+                }
+            }
+
+
+
+
+    }
+
+
 
     companion object {
         /**
