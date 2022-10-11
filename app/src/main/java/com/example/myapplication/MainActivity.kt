@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         loadFragment(Categ())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+
+        var sharedPref : SharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+
+        var nightModeSwitched = sharedPref.getBoolean("nightModeSwitched",false)
+
+        if (nightModeSwitched) {
+            loadFragment(Setting())
+            true
+        }
 
 
         bottomNav.setOnNavigationItemSelectedListener {
