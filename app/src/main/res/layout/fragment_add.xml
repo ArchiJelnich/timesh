@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root_l"
     tools:context=".Add">
 
     <RelativeLayout
@@ -49,9 +50,10 @@
                     android:id="@+id/cat_iv"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    app:tint="#E60808"
                     android:src="@drawable/ic_baseline_circle_24"
-                    app:tint="#E60808" />
-                <EditText
+                     />
+                <TextView
                     android:id="@+id/cat_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,7 +92,7 @@
 
                     <ImageView
                         android:id="@+id/up"
-                        android:layout_width="20dp"
+                        android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_baseline_arrow_drop_up_24"
                         app:tint="#E60808" />

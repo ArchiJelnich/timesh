@@ -78,7 +78,7 @@ class Categ : Fragment() {
         if (mySet.contains(black)) { black_tv.setTextColor(R.color.white)} else {black_tv.setTextColor(R.color.black)}
         if (mySet.contains(grey)) { grey_tv.setTextColor(R.color.white)} else {grey_tv.setTextColor(R.color.black)}
 */
-        red_tv.setText(orange)
+        red_tv.setText(red)
         orange_tv.setText(orange)
         yellow_tv.setText(yellow)
         green_tv.setText(green)

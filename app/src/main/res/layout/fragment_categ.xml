@@ -207,6 +207,7 @@
             android:id="@+id/black_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            app:tint="#000000"
             android:src="@drawable/ic_baseline_circle_24" />
         <EditText
             android:id="@+id/black_tv"
