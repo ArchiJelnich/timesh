@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -19,35 +18,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.graphics.drawable.DrawableCompat
-import kotlinx.android.synthetic.main.cat_popup.*
-import kotlinx.android.synthetic.main.cat_popup.black_iv
-import kotlinx.android.synthetic.main.cat_popup.blue_iv
-import kotlinx.android.synthetic.main.cat_popup.d_blue_iv
-import kotlinx.android.synthetic.main.cat_popup.green_iv
-import kotlinx.android.synthetic.main.cat_popup.grey_iv
-import kotlinx.android.synthetic.main.cat_popup.orange_iv
-import kotlinx.android.synthetic.main.cat_popup.pink_iv
-import kotlinx.android.synthetic.main.cat_popup.purple_iv
-import kotlinx.android.synthetic.main.cat_popup.red_iv
-import kotlinx.android.synthetic.main.cat_popup.red_tv
-import kotlinx.android.synthetic.main.cat_popup.orange_tv
-import kotlinx.android.synthetic.main.cat_popup.yellow_tv
-import kotlinx.android.synthetic.main.cat_popup.green_tv
-import kotlinx.android.synthetic.main.cat_popup.blue_tv
-import kotlinx.android.synthetic.main.cat_popup.d_blue_tv
-import kotlinx.android.synthetic.main.cat_popup.pink_tv
-import kotlinx.android.synthetic.main.cat_popup.purple_tv
-import kotlinx.android.synthetic.main.cat_popup.black_tv
-import kotlinx.android.synthetic.main.cat_popup.grey_tv
-import kotlinx.android.synthetic.main.cat_popup.yellow_iv
+import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment_add.*
-import kotlinx.android.synthetic.main.fragment_categ.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,6 +58,18 @@ class Add : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
+        val calendarDao = db.calendarDao()
+
+        //val newDate = Calendar("Hi", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10)
+        //Log.v("MyLog", "newDate " + newDate)
+        //calendarDao.insertAll(newDate)
+        //var calend_id = calendarDao.findByDate("Hi")
+        //Log.v("MyLog", "calend_id " + calend_id)
+        //Log.v("MyLog", "Loaded summ" + calend_id.summ)
+        Log.v("MyLog", "All " + calendarDao.getAll())
+        //val dates: List<Calendar> = calendarDao.getAll()
 
 
         up.setOnClickListener { onClick(up) }
@@ -230,6 +216,8 @@ class Add : Fragment() {
 
 
         }
+
+
 
 
     }

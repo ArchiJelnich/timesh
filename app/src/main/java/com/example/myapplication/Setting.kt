@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
+import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment_setting.*
 import java.util.*
 
@@ -109,6 +110,9 @@ class Setting : Fragment() {
 
             builder.setPositiveButton("Yes") { _, _ ->
                 sharedPref.edit().clear().commit();
+                val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
+                val calendarDao = db.calendarDao()
+                calendarDao.deleteAll()
 
             }
 
