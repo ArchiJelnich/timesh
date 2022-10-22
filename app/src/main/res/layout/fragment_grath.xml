@@ -89,9 +89,37 @@
             android:paddingLeft="5dp"
             android:id="@+id/l_7">
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:id="@+id/l_8">
 
         </LinearLayout>
 
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:id="@+id/l_9">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:id="@+id/l_10">
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -101,14 +129,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/date_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="01.06.2022"
+            android:paddingRight="10dp"
             android:inputType="date" />
 
-        <EditText
+        <TextView
             android:id="@+id/date_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

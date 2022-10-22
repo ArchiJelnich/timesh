@@ -2,15 +2,14 @@ package com.example.myapplication
 
 import android.app.*
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -128,6 +127,8 @@ class Setting : Fragment() {
 
 
     }
+
+
 
 
     companion object {

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadFragment(Categ())
+        loadFragment(Add())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
 

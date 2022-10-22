@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -18,10 +19,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.room.Room
+import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.android.synthetic.main.fragment_add.*
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter.BASIC_ISO_DATE
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,9 +43,13 @@ class Add : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var cat_to_add = "red"
+    var current = "2020-01-01"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidThreeTen.init(activity);
+        current = LocalDateTime.now().format(BASIC_ISO_DATE)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -54,6 +64,8 @@ class Add : Fragment() {
         return inflater.inflate(R.layout.fragment_add, container, false)
     }
 
+
+
     @SuppressLint("ServiceCast", "ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,6 +73,27 @@ class Add : Fragment() {
 
         val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
         val calendarDao = db.calendarDao()
+        calendarDao.findByDate(current)?. let {
+
+             //Log.v("MyLog", "newDate " + newDate)
+            //calendarDao.insertAll(newDate)
+            //var calend_id = calendarDao.findByDate("Hi")
+            //Log.v("MyLog", "calend_id " + calend_id)
+            //Log.v("MyLog", "Loaded summ" + calend_id.summ)
+
+            //val dates: List<Calendar> = calendarDao.getAll()
+            //Log.v("MyLog", "Not null")
+            Log.v("MyLog", "Gotcha!")
+
+        } ?: let {
+
+            val newDate = Calendar(current, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            calendarDao.insertAll(newDate)
+        }
+
+        Log.v("MyLog", "All " + calendarDao.getAll())
+        Log.v("MyLog", "All " + calendarDao.findByDate(current).date)
+
 
         //val newDate = Calendar("Hi", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10)
         //Log.v("MyLog", "newDate " + newDate)
@@ -68,12 +101,13 @@ class Add : Fragment() {
         //var calend_id = calendarDao.findByDate("Hi")
         //Log.v("MyLog", "calend_id " + calend_id)
         //Log.v("MyLog", "Loaded summ" + calend_id.summ)
-        Log.v("MyLog", "All " + calendarDao.getAll())
+        //Log.v("MyLog", "All " + calendarDao.getAll())
         //val dates: List<Calendar> = calendarDao.getAll()
 
 
         up.setOnClickListener { onClick(up) }
         down.setOnClickListener { onClick(down) }
+        add_but.setOnClickListener { onClick(add_but) }
 
         // Button click listener
         cat_iv.setOnClickListener {
@@ -108,7 +142,6 @@ class Add : Fragment() {
             slideOut.slideEdge = Gravity.END
             popupWindow.exitTransition = slideOut
             popupWindow.isFocusable = true;
-
 
 
 
@@ -165,6 +198,8 @@ class Add : Fragment() {
             pink_tv.text = sharedPref.getString("pink","Pink")
             black_tv.text = sharedPref.getString("black","Black")
             grey_tv.text = sharedPref.getString("grey","Grey")
+
+
 
             /*
             red_iv.setOnClickListener { onClick(red_iv) }
@@ -227,31 +262,43 @@ class Add : Fragment() {
 
     @SuppressLint("ResourceAsColor")
     fun onClick(v: View) {
+
+        val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
+        val calendarDao = db.calendarDao()
+
         when (v.id) {
             R.id.red_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("red","Red"))
                 cat_iv.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "red"
+
+
             }
             R.id.orange_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("orange","Orange"))
                 cat_iv.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN)
+                cat_to_add = "orange"
+
             }
             R.id.yellow_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("yellow","Yellow"))
                 cat_iv.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "yellow"
             }
             R.id.green_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("green","Green"))
                 cat_iv.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "green"
             }
             R.id.blue_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("blue","Blue"))
                 cat_iv.setColorFilter(Color.CYAN, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "blue"
 
                /* cat_iv.clearColorFilter()
                 DrawableCompat.setTint(
@@ -267,17 +314,20 @@ class Add : Fragment() {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("d_blue","Dark Blue"))
                 cat_iv.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "d_blue"
             }
             R.id.purple_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("purple","Purple"))
                 cat_iv.setColorFilter(Color.rgb(128,0,128), PorterDuff.Mode.SRC_IN)
+                cat_to_add = "purple"
             }
             R.id.pink_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("pink","Pink"))
                 cat_iv.colorFilter = null;
                 cat_iv.setColorFilter(Color.rgb(255,192,203),PorterDuff.Mode.SRC_IN)
+                cat_to_add = "pink"
 
 
             }
@@ -285,11 +335,13 @@ class Add : Fragment() {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("grey","Grey"))
                 cat_iv.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "grey"
             }
             R.id.black_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("black","Black"))
                 cat_iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
+                cat_to_add = "black"
 
 
             }
@@ -308,6 +360,147 @@ class Add : Fragment() {
 
 
             }
+
+
+            R.id.add_but -> {
+                var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
+                var ask = sharedPref.getBoolean("ask",false)
+
+                if (ask)
+                {
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("Comfirmation")
+                    builder.setMessage("Are you sure that you want to add?")
+                    builder.setPositiveButton("Yes") { _, _ ->
+
+
+
+                        val number_to_add = num_add.text.toString().toInt()
+
+                        if (calendarDao.findByDate(current).summ+number_to_add>24)
+                        {
+                            Toast.makeText(requireContext(), "You have more than 24 hours per day?", Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+
+                            when (cat_to_add) {
+                                "red" -> calendarDao.updateR(number_to_add, current)
+                                "orange" -> calendarDao.updateO(number_to_add, current)
+                                "yellow" -> calendarDao.updateY(number_to_add, current)
+                                "green" -> calendarDao.updateG(number_to_add, current)
+                                "blue" -> calendarDao.updateB(number_to_add, current)
+                                "d_blue" -> calendarDao.updateDB(number_to_add, current)
+                                "purple" -> calendarDao.updatePP(number_to_add, current)
+                                "pink" -> calendarDao.updateP(number_to_add, current)
+                                "grey" -> calendarDao.updateGr(number_to_add, current)
+                                "black" -> calendarDao.updateBl(number_to_add, current)
+
+                                else -> {
+                                    Log.v("MyLog", "Wrong category")
+                                }
+
+                            }
+
+                            var new_summ = calendarDao.findByDate(current).summ+number_to_add
+                            calendarDao.updateSumm(new_summ, current)
+                        }
+
+
+
+
+
+                        //if(calendarDao.findByDate(current).id==null)
+                        //{
+                        //    Log.v("MyLog", "None")
+                        //}
+
+
+
+
+                        //Log.v("MyLog", "newDate " + newDate)
+                        //calendarDao.insertAll(newDate)
+
+                        // find by date add
+                        // find by date update
+
+                        // add to base
+                        // popup
+                        // close
+                        Toast.makeText(requireContext(), "Your activity added", Toast.LENGTH_SHORT).show()
+
+
+                    }
+
+                    builder.setNegativeButton("No"){ _, _ ->
+
+
+                    }
+
+
+                    builder.show()
+
+                }
+
+            else {
+
+                    val number_to_add = num_add.text.toString().toInt()
+
+                    if (calendarDao.findByDate(current).summ+number_to_add>24)
+                    {
+                        Toast.makeText(requireContext(), "You have more than 24 hours per day?", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+
+                        when (cat_to_add) {
+                            "red" -> calendarDao.updateR(number_to_add, current)
+                            "orange" -> calendarDao.updateO(number_to_add, current)
+                            "yellow" -> calendarDao.updateY(number_to_add, current)
+                            "green" -> calendarDao.updateG(number_to_add, current)
+                            "blue" -> calendarDao.updateB(number_to_add, current)
+                            "d_blue" -> calendarDao.updateDB(number_to_add, current)
+                            "purple" -> calendarDao.updatePP(number_to_add, current)
+                            "pink" -> calendarDao.updateP(number_to_add, current)
+                            "grey" -> calendarDao.updateGr(number_to_add, current)
+                            "black" -> calendarDao.updateBl(number_to_add, current)
+
+                            else -> {
+                                Log.v("MyLog", "Wrong category")
+                            }
+
+                        }
+
+                        var new_summ = calendarDao.findByDate(current).summ+number_to_add
+                        calendarDao.updateSumm(new_summ, current)
+                    }
+
+
+
+
+
+                    //if(calendarDao.findByDate(current).id==null)
+                    //{
+                    //    Log.v("MyLog", "None")
+                    //}
+
+
+
+
+                    //Log.v("MyLog", "newDate " + newDate)
+                    //calendarDao.insertAll(newDate)
+
+                    // find by date add
+                    // find by date update
+
+                    // add to base
+                    // popup
+                    // close
+                    Toast.makeText(requireContext(), "Your activity added", Toast.LENGTH_SHORT).show()
+
+            }
+            }
+
+
+
 
             else -> {  }
         }
