@@ -73,14 +73,13 @@ class Grath : Fragment() {
 
         val contexth = activity
 
+        date_stop.text = current
+        var new_data_date = LocalDate.parse(current, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        date_start.text = new_data_date.minusDays(9).toString()
+        //Log.v("MyLog", "Date setted")
 
 
-
-
-
-
-
-        val cubes = ArrayList<TextView>(168)
+        val cubes = ArrayList<TextView>(240)
 
 
 
@@ -129,6 +128,113 @@ class Grath : Fragment() {
             }
 
 
+        val dates = ArrayList<LocalDate>(10)
+
+        val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
+        val calendarDao = db.calendarDao()
+        var k=0
+
+        for (i in 0 until 10)
+        {
+
+            dates.add(LocalDate.parse(date_start.text, DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+            dates[i]= dates[i].plusDays(i.toLong())
+            Log.v("MyLog", "Check date " + i + " " + dates[i])
+
+            //val formattedDate = dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+            //dates[i] = LocalDate.parse(formattedDate,DateTimeFormatter.ofPattern("yyyyMMdd"))
+            //Log.v("MyLog", "dates[i] s " + dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+
+            calendarDao.findByDate(dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString())?. let {
+
+                Log.v("MyLog", "We have records " + dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString() + " summ=" + calendarDao.findByDate(dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString()).summ)
+                var current_obj = calendarDao.findByDate(dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString())
+
+                for (i in 0 until current_obj.red)
+                {
+                    cubes[k].setBackgroundColor(Color.RED)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                    //Log.v("MyLog", "check red " + k)
+                }
+                for (i in 0 until current_obj.orange)
+                {
+                    cubes[k].setBackgroundColor(Color.rgb(255, 191, 0))
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.yellow)
+                {
+                    cubes[k].setBackgroundColor(Color.YELLOW)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.green)
+                {
+                    cubes[k].setBackgroundColor(Color.GREEN)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.blue)
+                {
+                    cubes[k].setBackgroundColor(Color.CYAN)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.d_blue)
+                {
+                    cubes[k].setBackgroundColor(Color.BLUE)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.purple)
+                {
+                    cubes[k].setBackgroundColor(Color.rgb(128,0,128))
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.pink)
+                {
+                    cubes[k].setBackgroundColor(Color.rgb(255,192,203))
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.grey)
+                {
+                    cubes[k].setBackgroundColor(Color.GRAY)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+                }
+                for (i in 0 until current_obj.black)
+                {
+                    cubes[k].setBackgroundColor(Color.BLACK)
+                    cubes[k].visibility = View.VISIBLE
+                    k++
+
+
+                }
+
+                for (i in 0 until (24-current_obj.summ))
+                {
+                    cubes[k].visibility = View.INVISIBLE
+                    k++
+                    //Log.v("MyLog", "set gone " + i)
+
+
+                }
+
+            } ?: let {
+                    for (i in 1.. 24)
+                    {
+                        cubes[k].visibility = View.INVISIBLE
+                        //cubes[k].setBackgroundColor(Color.GRAY)
+
+                        //Log.v("MyLog", "set gone ")
+                        k++
+                    }
+                }
+
+        }
 
 
 
@@ -161,7 +267,7 @@ class Grath : Fragment() {
                     var new_data_text = "" + dayOfMonth + "." + monthOfYear + "." + year
                     var new_data_date = LocalDate.parse(new_data_text, DateTimeFormatter.ofPattern("d.M.yyyy"))
                     date_stop.text = new_data_date.toString()
-                    new_data_date = new_data_date.minusDays(7)
+                    new_data_date = new_data_date.minusDays(6)
                     date_start.text = new_data_date.toString()
                 }, year, month, day)
                 dpd.show()
@@ -177,7 +283,7 @@ class Grath : Fragment() {
                     var new_data_text = "" + dayOfMonth + "." + monthOfYear + "." + year
                     var new_data_date = LocalDate.parse(new_data_text, DateTimeFormatter.ofPattern("d.M.yyyy"))
                     date_start.text = new_data_date.toString()
-                    new_data_date = new_data_date.plusDays(7)
+                    new_data_date = new_data_date.plusDays(6)
                     date_stop.text = new_data_date.toString()
                 }, year, month, day)
                 dpd.show()
