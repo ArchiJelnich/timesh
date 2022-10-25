@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
@@ -105,9 +104,9 @@ class Add : Fragment() {
         //val dates: List<Calendar> = calendarDao.getAll()
 
 
-        up.setOnClickListener { onClick(up) }
-        down.setOnClickListener { onClick(down) }
-        add_but.setOnClickListener { onClick(add_but) }
+        up.setOnClickListener { onClick(up, null) }
+        down.setOnClickListener { onClick(down, null) }
+        add_but.setOnClickListener { onClick(add_but, null) }
 
         // Button click listener
         cat_iv.setOnClickListener {
@@ -146,34 +145,34 @@ class Add : Fragment() {
 
 
             var red = view.findViewById<ImageView>(R.id.red_iv)
-            red.setOnClickListener { onClick(red) }
+            red.setOnClickListener { onClick(red, popupWindow) }
 
             var orange = view.findViewById<ImageView>(R.id.orange_iv)
-            orange.setOnClickListener { onClick(orange) }
+            orange.setOnClickListener { onClick(orange, popupWindow) }
 
             var green = view.findViewById<ImageView>(R.id.green_iv)
-            green.setOnClickListener { onClick(green) }
+            green.setOnClickListener { onClick(green,popupWindow) }
 
             var blue = view.findViewById<ImageView>(R.id.blue_iv)
-            blue.setOnClickListener { onClick(blue) }
+            blue.setOnClickListener { onClick(blue,popupWindow) }
 
             var d_blue = view.findViewById<ImageView>(R.id.d_blue_iv)
-            d_blue.setOnClickListener { onClick(d_blue) }
+            d_blue.setOnClickListener { onClick(d_blue,popupWindow) }
 
             var purple = view.findViewById<ImageView>(R.id.purple_iv)
-            purple.setOnClickListener { onClick(purple) }
+            purple.setOnClickListener { onClick(purple,popupWindow) }
 
             var pink = view.findViewById<ImageView>(R.id.pink_iv)
-            pink.setOnClickListener { onClick(pink) }
+            pink.setOnClickListener { onClick(pink,popupWindow) }
 
             var yellow = view.findViewById<ImageView>(R.id.yellow_iv)
-            yellow.setOnClickListener { onClick(yellow) }
+            yellow.setOnClickListener { onClick(yellow,popupWindow) }
 
             var black = view.findViewById<ImageView>(R.id.black_iv)
-            black.setOnClickListener { onClick(black) }
+            black.setOnClickListener { onClick(black,popupWindow) }
 
             var grey = view.findViewById<ImageView>(R.id.grey_iv)
-            grey.setOnClickListener { onClick(grey) }
+            grey.setOnClickListener { onClick(grey,popupWindow) }
 
             var red_tv = view.findViewById<TextView>(R.id.red_tv)
             var orange_tv = view.findViewById<TextView>(R.id.orange_tv)
@@ -224,12 +223,12 @@ class Add : Fragment() {
 
 
 
-            // Set a click listener for popup's button widget
+            //Set a click listener for popup's button widget
             buttonPopup.setOnClickListener{
                 // Dismiss the popup window
                 popupWindow.dismiss()
             }
-            */
+*/
 
             // Set a dismiss listener for popup window
             popupWindow.setOnDismissListener {
@@ -261,16 +260,17 @@ class Add : Fragment() {
 
 
     @SuppressLint("ResourceAsColor")
-    fun onClick(v: View) {
+    fun onClick(v: View, popupWindow: PopupWindow?) {
 
         val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
         val calendarDao = db.calendarDao()
 
         when (v.id) {
             R.id.red_iv -> {
+
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("red","Red"))
-                cat_iv.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.red), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "red"
 
 
@@ -278,26 +278,26 @@ class Add : Fragment() {
             R.id.orange_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("orange","Orange"))
-                cat_iv.setColorFilter(Color.rgb(255, 191, 0), PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.orange), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "orange"
 
             }
             R.id.yellow_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("yellow","Yellow"))
-                cat_iv.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.yellow), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "yellow"
             }
             R.id.green_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("green","Green"))
-                cat_iv.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "green"
             }
             R.id.blue_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("blue","Blue"))
-                cat_iv.setColorFilter(Color.CYAN, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.blue), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "blue"
 
                /* cat_iv.clearColorFilter()
@@ -313,20 +313,19 @@ class Add : Fragment() {
             R.id.d_blue_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("d_blue","Dark Blue"))
-                cat_iv.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.d_blue), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "d_blue"
             }
             R.id.purple_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("purple","Purple"))
-                cat_iv.setColorFilter(Color.rgb(128,0,128), PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.purple), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "purple"
             }
             R.id.pink_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("pink","Pink"))
-                cat_iv.colorFilter = null;
-                cat_iv.setColorFilter(Color.rgb(255,192,203),PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.pink),PorterDuff.Mode.SRC_IN)
                 cat_to_add = "pink"
 
 
@@ -334,13 +333,13 @@ class Add : Fragment() {
             R.id.grey_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("grey","Grey"))
-                cat_iv.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.grey), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "grey"
             }
             R.id.black_iv -> {
                 var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
                 cat_tv.setText(sharedPref.getString("black","Black"))
-                cat_iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
+                cat_iv.setColorFilter(resources.getColor(R.color.black), PorterDuff.Mode.SRC_IN)
                 cat_to_add = "black"
 
 
@@ -503,6 +502,10 @@ class Add : Fragment() {
 
 
             else -> {  }
+        }
+
+        if (popupWindow != null) {
+            popupWindow.dismiss()
         }
     }
 

@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.lang.Exception
@@ -27,15 +28,32 @@ class MainActivity : AppCompatActivity() {
         var sharedPref : SharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
 
         var nightModeSwitched = sharedPref.getBoolean("nightModeSwitched",false)
+        var thema_dark = sharedPref.getBoolean("thema_dark",false)
+
 
         if (nightModeSwitched) {
             loadFragment(Setting())
             true
         }
 
+        if (thema_dark)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
 
         bottomNav.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+            when(it.itemId)
+            {
+                R.id.Add -> {
+                    loadFragment(Add())
+                    true
+                }
+
                 R.id.Settings -> {
                     loadFragment(Setting())
                     true
@@ -48,10 +66,7 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(Grath())
                     true
                 }
-                R.id.Add -> {
-                    loadFragment(Add())
-                    true
-                }
+
                 else -> {
                     false
                 }

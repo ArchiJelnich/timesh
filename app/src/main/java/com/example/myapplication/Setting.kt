@@ -62,6 +62,9 @@ class Setting : Fragment() {
         editor.putBoolean("nightModeSwitched",false)
         editor.commit()
 
+
+
+
         switch_lang.setChecked(lang)
         switch_thema.setChecked(thema_dark)
         switch_ask.setChecked(ask)

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root_l"
+    style="@style/style_main"
     tools:context=".Add">
 
     <RelativeLayout
@@ -32,8 +33,8 @@
                     android:id="@+id/header_cat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    style="@style/header"
+                    android:paddingBottom="30dp"
+                    style="@style/style_header"
                     android:gravity="center"
                     android:text="What were you doing?" />
 
@@ -48,9 +49,9 @@
 
                 <ImageView
                     android:id="@+id/cat_iv"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:tint="#E60808"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:tint="@color/red"
                     android:src="@drawable/ic_baseline_circle_24"
                      />
                 <TextView
@@ -58,7 +59,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
-                    android:paddingBottom="10dp"
                     android:text="Red" />
             </LinearLayout>
 
@@ -93,16 +93,16 @@
                     <ImageView
                         android:id="@+id/up"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="50dp"
                         android:src="@drawable/ic_baseline_arrow_drop_up_24"
-                        app:tint="#E60808" />
+                        app:tint="@color/main" />
 
                     <ImageView
                         android:id="@+id/down"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                        app:tint="#E60808" />
+                        app:tint="@color/main" />
 
 
                     </LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -64,7 +66,7 @@ class Grath : Fragment() {
         return inflater.inflate(R.layout.fragment_grath, container, false)
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -118,8 +120,8 @@ class Grath : Fragment() {
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     )
                     cubes[k].gravity = Gravity.CENTER
-                    cubes[k].width=50
-                    cubes[k].height=50
+                    cubes[k].width=60
+                    cubes[k].height=60
 
                     cubes[k].setBackgroundColor(Color.parseColor("#000000"))
 
@@ -128,6 +130,25 @@ class Grath : Fragment() {
             }
 
 
+
+
+
+        date_stop.setOnClickListener { onClick(date_stop, cubes) }
+        date_start.setOnClickListener { onClick(date_start, cubes) }
+
+
+
+        DrawGrath(cubes);
+
+
+
+
+
+
+    }
+
+    @SuppressLint("ResourceAsColor")
+    fun DrawGrath(cubes :ArrayList<TextView>) {
         val dates = ArrayList<LocalDate>(10)
 
         val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
@@ -140,10 +161,10 @@ class Grath : Fragment() {
             dates.add(LocalDate.parse(date_start.text, DateTimeFormatter.ofPattern("yyyy-MM-dd")))
             dates[i]= dates[i].plusDays(i.toLong())
             Log.v("MyLog", "Check date " + i + " " + dates[i])
-
+            //Log.v("MyLog", "Check date_f " + dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")))
             //val formattedDate = dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd"))
             //dates[i] = LocalDate.parse(formattedDate,DateTimeFormatter.ofPattern("yyyyMMdd"))
-            //Log.v("MyLog", "dates[i] s " + dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+
 
             calendarDao.findByDate(dates[i].format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString())?. let {
 
@@ -152,62 +173,62 @@ class Grath : Fragment() {
 
                 for (i in 0 until current_obj.red)
                 {
-                    cubes[k].setBackgroundColor(Color.RED)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.red))
                     cubes[k].visibility = View.VISIBLE
                     k++
                     //Log.v("MyLog", "check red " + k)
                 }
                 for (i in 0 until current_obj.orange)
                 {
-                    cubes[k].setBackgroundColor(Color.rgb(255, 191, 0))
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.orange))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.yellow)
                 {
-                    cubes[k].setBackgroundColor(Color.YELLOW)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.yellow))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.green)
                 {
-                    cubes[k].setBackgroundColor(Color.GREEN)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.green))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.blue)
                 {
-                    cubes[k].setBackgroundColor(Color.CYAN)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.blue))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.d_blue)
                 {
-                    cubes[k].setBackgroundColor(Color.BLUE)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.d_blue))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.purple)
                 {
-                    cubes[k].setBackgroundColor(Color.rgb(128,0,128))
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.purple))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.pink)
                 {
-                    cubes[k].setBackgroundColor(Color.rgb(255,192,203))
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.pink))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.grey)
                 {
-                    cubes[k].setBackgroundColor(Color.GRAY)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.grey))
                     cubes[k].visibility = View.VISIBLE
                     k++
                 }
                 for (i in 0 until current_obj.black)
                 {
-                    cubes[k].setBackgroundColor(Color.BLACK)
+                    cubes[k].setBackgroundColor(resources.getColor(R.color.black))
                     cubes[k].visibility = View.VISIBLE
                     k++
 
@@ -224,33 +245,22 @@ class Grath : Fragment() {
                 }
 
             } ?: let {
-                    for (i in 1.. 24)
-                    {
-                        cubes[k].visibility = View.INVISIBLE
-                        //cubes[k].setBackgroundColor(Color.GRAY)
-
-                        //Log.v("MyLog", "set gone ")
-                        k++
-                    }
+                for (i in 1.. 24)
+                {
+                    cubes[k].visibility = View.INVISIBLE
+                    //cubes[k].setBackgroundColor(Color.GRAY)
+                    //Log.v("MyLog", "set gone ")
+                    k++
                 }
+            }
 
         }
 
-
-
-        date_stop.setOnClickListener { onClick(date_stop) }
-        date_start.setOnClickListener { onClick(date_start) }
-
-
-
-
-
-
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("ResourceAsColor")
-    fun onClick(v: View) {
+    fun onClick(v: View, cubes :ArrayList<TextView>) {
 
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -263,28 +273,28 @@ class Grath : Fragment() {
                 val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     //date_stop.setText("" + dayOfMonth + "." + monthOfYear + "." + year)
                     ///ISO_LOCAL_DATE
-
-                    var new_data_text = "" + dayOfMonth + "." + monthOfYear + "." + year
+                    var new_data_text = "" + dayOfMonth + "." + (monthOfYear+1) + "." + year
                     var new_data_date = LocalDate.parse(new_data_text, DateTimeFormatter.ofPattern("d.M.yyyy"))
                     date_stop.text = new_data_date.toString()
-                    new_data_date = new_data_date.minusDays(6)
+                    new_data_date = new_data_date.minusDays(9)
                     date_start.text = new_data_date.toString()
+                    DrawGrath(cubes)
                 }, year, month, day)
+
+
                 dpd.show()
-
-
-
 
             }
             R.id.date_start -> {
 
 
                 val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    var new_data_text = "" + dayOfMonth + "." + monthOfYear + "." + year
+                    var new_data_text = "" + dayOfMonth + "." + (monthOfYear+1) + "." + year
                     var new_data_date = LocalDate.parse(new_data_text, DateTimeFormatter.ofPattern("d.M.yyyy"))
                     date_start.text = new_data_date.toString()
-                    new_data_date = new_data_date.plusDays(6)
+                    new_data_date = new_data_date.plusDays(9)
                     date_stop.text = new_data_date.toString()
+                    DrawGrath(cubes)
                 }, year, month, day)
                 dpd.show()
 

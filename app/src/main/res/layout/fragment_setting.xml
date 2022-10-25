@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/style_main"
     tools:context=".Setting">
 
     <RelativeLayout
@@ -30,8 +31,8 @@
                     android:id="@+id/header_set"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    style="@style/header"
+                    android:paddingBottom="30dp"
+                    style="@style/style_header"
                     android:gravity="center"
                     android:text="@string/header"/>
 
@@ -79,9 +80,9 @@
                     android:id="@+id/switch_thema"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textOff="Dark"
+                    android:textOff="Light"
                     android:showText="true"
-                    android:textOn="Light"/>
+                    android:textOn="Dark"/>
 
             </LinearLayout>
 
@@ -125,9 +126,9 @@
                     android:id="@+id/switch_ask"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textOff="Yes"
+                    android:textOff="No"
                     android:showText="true"
-                    android:textOn="No"/>
+                    android:textOn="True"/>
                 </LinearLayout>
 
             </LinearLayout>
