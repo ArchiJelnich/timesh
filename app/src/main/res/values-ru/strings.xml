@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="header_setting">Настройки</string>
+
+
+    <string name="setting_lang">Язык</string>
+    <string name="setting_eng">Eng</string>
+    <string name="setting_rus">Рус</string>
+    <string name="setting_thema">Тема</string>
+    <string name="setting_light">День</string>
+    <string name="setting_night">Ночь</string>
+    <string name="setting_ask_1">Спрашивать перед добавление?</string>
+    <string name="setting_ask_2">Это важно, потому что нельзя править после добавления</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="setting_deleteall">Удалить все данные</string>
+    <string name="version_text">"Версия "</string>
+    <string name="header_add">Что вы делали?</string>
+    <string name="add_button">Добавить</string>
+    <string name="header_categ">Категории</string>
+    <string name="setting_confirm">Подтверждение</string>
+    <string name="setting_confirm_text">Удалить?</string>
+    <string name="header_grath">График</string>
+    <string name="toast_24">У вас больше 24 часов в сутках?</string>
+    <string name="toast_added">Добавлено</string>
+
+
+</resources>

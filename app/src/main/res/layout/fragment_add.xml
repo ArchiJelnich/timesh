@@ -36,7 +36,7 @@
                     android:paddingBottom="30dp"
                     style="@style/style_header"
                     android:gravity="center"
-                    android:text="What were you doing?" />
+                    android:text="@string/header_add" />
 
             </LinearLayout>
 
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:gravity="center"
-                android:text="Add" />
+                android:text="@string/add_button" />
 
 
 

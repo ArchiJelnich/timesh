@@ -74,7 +74,12 @@ class Add : Fragment() {
         val calendarDao = db.calendarDao()
         calendarDao.findByDate(current)?. let {
 
-             //Log.v("MyLog", "newDate " + newDate)
+        var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        cat_tv.text = sharedPref.getString("red","Red")
+
+
+
+            //Log.v("MyLog", "newDate " + newDate)
             //calendarDao.insertAll(newDate)
             //var calend_id = calendarDao.findByDate("Hi")
             //Log.v("MyLog", "calend_id " + calend_id)
@@ -378,7 +383,7 @@ class Add : Fragment() {
 
                         if (calendarDao.findByDate(current).summ+number_to_add>24)
                         {
-                            Toast.makeText(requireContext(), "You have more than 24 hours per day?", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), R.string.toast_24, Toast.LENGTH_SHORT).show()
                         }
                         else {
 
@@ -425,7 +430,7 @@ class Add : Fragment() {
                         // add to base
                         // popup
                         // close
-                        Toast.makeText(requireContext(), "Your activity added", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), R.string.toast_added, Toast.LENGTH_SHORT).show()
 
 
                     }
@@ -446,7 +451,7 @@ class Add : Fragment() {
 
                     if (calendarDao.findByDate(current).summ+number_to_add>24)
                     {
-                        Toast.makeText(requireContext(), "You have more than 24 hours per day?", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), R.string.toast_24, Toast.LENGTH_SHORT).show()
                     }
                     else {
 
@@ -493,7 +498,7 @@ class Add : Fragment() {
                     // add to base
                     // popup
                     // close
-                    Toast.makeText(requireContext(), "Your activity added", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.toast_added, Toast.LENGTH_SHORT).show()
 
             }
             }

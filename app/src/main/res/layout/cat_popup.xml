@@ -28,13 +28,12 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/red" />
-            <EditText
+            <TextView
                 android:id="@+id/red_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
-                style="@style/style_edittext"
                 android:text="Red" />
         </LinearLayout>
 
@@ -50,12 +49,11 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/orange" />
-            <EditText
+            <TextView
                 android:id="@+id/orange_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                style="@style/style_edittext"
                 android:paddingBottom="10dp"
                 android:text="Orange" />
         </LinearLayout>
@@ -72,10 +70,9 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/yellow" />
-            <EditText
+            <TextView
                 android:id="@+id/yellow_tv"
                 android:layout_width="wrap_content"
-                style="@style/style_edittext"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
@@ -94,10 +91,9 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/green" />
-            <EditText
+            <TextView
                 android:id="@+id/green_tv"
                 android:layout_width="wrap_content"
-                style="@style/style_edittext"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
@@ -116,10 +112,9 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/blue" />
-            <EditText
+            <TextView
                 android:id="@+id/blue_tv"
                 android:layout_width="wrap_content"
-                style="@style/style_edittext"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
@@ -138,11 +133,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/d_blue" />
-            <EditText
+            <TextView
                 android:id="@+id/d_blue_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/style_edittext"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
                 android:text="Blue" />
@@ -160,10 +154,9 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/purple" />
-            <EditText
+            <TextView
                 android:id="@+id/purple_tv"
                 android:layout_width="wrap_content"
-                style="@style/style_edittext"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
@@ -182,11 +175,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/pink" />
-            <EditText
+            <TextView
                 android:id="@+id/pink_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/style_edittext"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
                 android:text="Pink" />
@@ -203,11 +195,10 @@
                 android:layout_height="50dp"
                 app:tint="@color/black"
                 android:src="@drawable/ic_baseline_circle_24" />
-            <EditText
+            <TextView
                 android:id="@+id/black_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/style_edittext"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"
                 android:text="Black" />
@@ -225,9 +216,8 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_circle_24"
                 app:tint="@color/grey" />
-            <EditText
+            <TextView
                 android:id="@+id/grey_tv"
-                style="@style/style_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"

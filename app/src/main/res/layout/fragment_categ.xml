@@ -35,7 +35,7 @@
                 android:paddingBottom="30dp"
                 style="@style/style_header"
                 android:gravity="center"
-                android:text="Category" />
+                android:text="@string/header_categ" />
 
         </LinearLayout>
 

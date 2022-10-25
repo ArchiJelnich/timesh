@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.widget.ImageView
 import android.widget.PopupMenu
@@ -13,8 +14,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.lang.Exception
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MyTrack : AppCompatActivity() {
 
     lateinit var bottomNav : BottomNavigationView
 
@@ -26,12 +28,31 @@ class MainActivity : AppCompatActivity() {
 
 
         var sharedPref : SharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-
-        var nightModeSwitched = sharedPref.getBoolean("nightModeSwitched",false)
+        var DarkModeSwitched = sharedPref.getBoolean("DarkModeSwitched",false)
+        var LangModeSwitched = sharedPref.getBoolean("LangModeSwitched",false)
         var thema_dark = sharedPref.getBoolean("thema_dark",false)
+        var lang = sharedPref.getBoolean("lang",false)
+        var editor = sharedPref.edit()
 
 
-        if (nightModeSwitched) {
+
+
+
+        if (DarkModeSwitched) {
+            editor.putBoolean("DarkModeSwitched",false)
+            loadFragment(Setting())
+            true
+        }
+
+        if (LangModeSwitched) {
+
+            editor.putBoolean("LangModeSwitched",false)
+
+            if (lang) {
+                setLocale("en")
+            } else {
+                setLocale("be")
+            }
             loadFragment(Setting())
             true
         }
@@ -39,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         if (thema_dark)
         {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
         }
         else
         {
@@ -79,6 +101,20 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.container,fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    fun setLocale(localeName: String) {
+
+        lateinit var locale: Locale
+        locale = Locale(localeName)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = locale
+        res.updateConfiguration(conf, dm)
+
+
+
     }
 
 }

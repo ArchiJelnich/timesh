@@ -164,6 +164,9 @@ class Categ : Fragment() {
         })
 
 
+
+
+
         //editor.putBoolean("nightModeSwitched",false)
         //editor.commit()
 
@@ -174,7 +177,7 @@ class Categ : Fragment() {
         var s_st = s.toString()
         val s_chars: Array<Char> = s_st.toCharArray().toTypedArray()
         var s_new = ""
-        val s_w="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ1234567890"
+        val s_w="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ1234567890 "
 
         for (char in s_chars) {
             if(s_w.contains(char))
@@ -182,8 +185,14 @@ class Categ : Fragment() {
                 s_new += char
                 Log.v("MyLog", "Checking " + char)
             }
+            else {
 
-            Toast.makeText(requireContext(), "Special characters will be deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Special characters will be deleted",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
         }
 

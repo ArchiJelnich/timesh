@@ -1,15 +1,20 @@
 package com.example.myapplication
 
-import android.app.*
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.FragmentTransaction
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -59,7 +64,12 @@ class Setting : Fragment() {
         var lang = sharedPref.getBoolean("lang",false)
         var thema_dark = sharedPref.getBoolean("thema_dark",false)
         var ask = sharedPref.getBoolean("ask",false)
-        editor.putBoolean("nightModeSwitched",false)
+
+        editor.putBoolean("DarkModeSwitched",false)
+        editor.putBoolean("LangModeSwitched",false)
+
+
+
         editor.commit()
 
 
@@ -74,8 +84,21 @@ class Setting : Fragment() {
             // do something, the isChecked will be
             // true if the switch is in the On position
 
+
             editor.putBoolean("lang",isChecked)
+            editor.putBoolean("DarkModeSwitched",true)
             editor.commit()
+
+
+
+            if (isChecked && !lang) {
+                setLocale("en")
+            } else if (lang){
+                setLocale("ru")
+            }
+
+
+
 
         })
 
@@ -83,9 +106,11 @@ class Setting : Fragment() {
             // do something, the isChecked will be
             // true if the switch is in the On position
 
-            editor.putBoolean("nightModeSwitched",true)
+            editor.putBoolean("LangModeSwitched",false)
             editor.putBoolean("thema_dark",isChecked)
             editor.commit()
+
+            Log.v("MyLog", "Theme changed")
 
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -106,11 +131,11 @@ class Setting : Fragment() {
 
         add_del.setOnClickListener(){
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Comfirmation")
-            builder.setMessage("Delete?")
+            builder.setTitle(R.string.setting_confirm)
+            builder.setMessage(R.string.setting_deleteall)
             //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(R.string.yes) { _, _ ->
                 sharedPref.edit().clear().commit();
                 val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "calendar").allowMainThreadQueries().build() //MUST BE REFACTOR TO THREAD!!!
                 val calendarDao = db.calendarDao()
@@ -118,7 +143,7 @@ class Setting : Fragment() {
 
             }
 
-            builder.setNegativeButton("No") { _, _ ->
+            builder.setNegativeButton(R.string.no) { _, _ ->
 
             }
 
@@ -131,7 +156,24 @@ class Setting : Fragment() {
 
     }
 
+    fun setLocale(localeName: String) {
 
+        lateinit var locale: Locale
+        locale = Locale(localeName)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = locale
+        res.updateConfiguration(conf, dm)
+
+        activity?.let{
+            val intent = Intent (it, MyTrack::class.java)
+            it.startActivity(intent)
+
+
+        }
+
+    }
 
 
     companion object {

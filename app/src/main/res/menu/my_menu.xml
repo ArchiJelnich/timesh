@@ -3,17 +3,17 @@
     <item
         android:id="@+id/Add"
         android:icon="@drawable/ic_baseline_add_24"
-        android:title="Add" />
+        android:title="@string/add_button" />
     <item
         android:id="@+id/Settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Settings"  />
+        android:title="@string/header_setting"  />
     <item
         android:id="@+id/Category"
         android:icon="@drawable/ic_baseline_category_24"
-        android:title="Category" />
+        android:title="@string/header_categ" />
     <item
         android:id="@+id/Graph"
         android:icon="@drawable/ic_baseline_auto_graph_24"
-        android:title="Graph" />
+        android:title="@string/header_grath" />
 </menu>

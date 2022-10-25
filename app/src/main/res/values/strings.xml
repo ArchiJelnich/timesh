@@ -1,7 +1,29 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="version">1.0.0</string>
-    <string name="header">Settings</string>
+    <string name="version" translatable="false">1.0.0</string>
+    <string name="header_setting">Settings</string>
+
+    <string name="setting_lang">Language</string>
+    <string name="setting_eng">Eng</string>
+    <string name="setting_rus">Рус</string>
+    <string name="setting_thema">Thema</string>
+    <string name="setting_light">Light</string>
+    <string name="setting_night">Dark</string>
+    <string name="setting_ask_1">Ask before add?</string>
+    <string name="setting_ask_2">It os important because you can\'t change info after adding</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="setting_deleteall">Delete all data</string>
+    <string name="version_text">Version </string>
+    <string name="header_add">What were you doing?</string>
+    <string name="add_button">Add</string>
+    <string name="header_categ">Category</string>
+    <string name="header_grath">Grath</string>
+    <string name="setting_confirm">Comfirmation</string>
+    <string name="setting_confirm_text">Delete?</string>
+    <string name="toast_24">"You have more than 24 hours per day?"</string>string>
+    <string name="toast_added">Added</string>string>
+
 
 
 </resources>
